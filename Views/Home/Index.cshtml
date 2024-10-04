@@ -1,0 +1,146 @@
+﻿@{
+    ViewBag.Title = "Painel da Lanchonete";
+}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Painel ERP Lanchonete</title>
+    <style>
+        /* CSS adicional para expandir a tela */
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        #wrapper {
+            display: flex;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #sidebar-wrapper {
+            flex: 0 0 250px;
+        }
+
+        #page-content-wrapper {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        /* Ajustes de Estilo - Textos e Elementos Visuais */
+        .sidebar-heading {
+            font-size: 1.8rem;
+            padding: 1.5rem;
+        }
+
+        .list-group-item {
+            font-size: 1.2rem;
+            padding: 15px 20px;
+        }
+
+        .container-fluid {
+            font-size: 1.1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        p.lead {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            border-radius: 15px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+            .card:hover {
+                transform: scale(1.05);
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            }
+
+        .card-title {
+            font-size: 1.8rem;
+        }
+
+        .card-text {
+            font-size: 1.2rem;
+        }
+
+        .btn {
+            font-size: 1.2rem;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Menu Lateral -->
+        <div id="sidebar-wrapper" class="bg-dark">
+            <div class="sidebar-heading text-center py-4 text-white"><strong>Menu Principal</strong></div>
+            <div class="list-group list-group-flush">
+                <a href="@Url.Action("Index", "Pedido")" class="list-group-item list-group-item-action bg-dark text-white">Pedidos</a>
+                <a href="@Url.Action("Index", "Produtoes")" class="list-group-item list-group-item-action bg-dark text-white">Produtos</a>
+                <a href="@Url.Action("Index", "Estoque")" class="list-group-item list-group-item-action bg-dark text-white">Estoque</a>
+                <a href="@Url.Action("Index", "Clientes")" class="list-group-item list-group-item-action bg-dark text-white">Clientes</a>
+                <a href="@Url.Action("Index", "Relatorios")" class="list-group-item list-group-item-action bg-dark text-white">Relatórios</a>
+                <a href="@Url.Action("Index", "Configuracoes")" class="list-group-item list-group-item-action bg-dark text-white">Configurações</a>
+                <a href="@Url.Action("Logout", "Home")" class="list-group-item list-group-item-action bg-dark text-white">Sair</a>
+            </div>
+        </div>
+
+        <!-- Conteúdo Principal -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <h1 class="mt-4">Bem-vindo ao ERP da Lanchonete</h1>
+                <p class="lead">Gerencie seus pedidos, produtos e clientes de maneira fácil e intuitiva.</p>
+
+                <!-- Cards de Atalhos Rápidos -->
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card text-white bg-success">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">Gerenciar Pedidos</h5>
+                                <p class="card-text flex-grow-1">Acesse e controle todos os pedidos em andamento.</p>
+                                <a href="@Url.Action("Index", "Pedido")" class="btn btn-light mt-auto">Acessar Pedidos</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card text-white bg-warning">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">Controle de Estoque</h5>
+                                <p class="card-text flex-grow-1">Verifique e atualize o estoque dos produtos.</p>
+                                <a href="@Url.Action("Index", "Estoque")" class="btn btn-light mt-auto">Ver Estoque</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="card text-white bg-info">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">Relatórios</h5>
+                                <p class="card-text flex-grow-1">Visualize os relatórios de vendas e performance.</p>
+                                <a href="@Url.Action("Index", "Relatorios")" class="btn btn-light mt-auto">Ver Relatórios</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

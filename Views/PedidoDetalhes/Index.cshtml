@@ -1,0 +1,51 @@
+﻿@model IEnumerable<LanchoneteCore.Models.PedidoDetalhe>
+
+@{
+    ViewData["Title"] = "Cozinha";
+}
+
+    <h2>Detalhes do pedido</h2>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantidade)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Preco)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Produto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Pedido)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantidade)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Preco)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Produto.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pedido.PedidoID)
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.PedidoDetalheID">Detalhes</a>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a asp-action="../Pedidoes/Index">Retornar à lista</a>

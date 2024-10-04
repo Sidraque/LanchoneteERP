@@ -1,0 +1,50 @@
+﻿/* Estilo Geral */
+body {
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* Menu Lateral */
+#sidebar-wrapper {
+    min-height: 100vh;
+    width: 250px;
+    background-color: #343a40;
+    color: #fff;
+    transition: margin 0.25s ease-out;
+    position: fixed;
+}
+
+.sidebar-heading {
+    font-size: 1.5rem;
+    padding: 1rem;
+    text-align: center;
+}
+
+.list-group-item {
+    color: #fff;
+    background-color: #343a40;
+    border: none;
+}
+
+    .list-group-item:hover {
+        background-color: #495057;
+    }
+
+/* Conteúdo Principal */
+#page-content-wrapper {
+    margin-left: 250px; /* Ajuste para ocupar o espaço ao lado do menu lateral */
+    padding: 20px;
+    width: calc(100% - 250px);
+    background-color: #f8f9fa;
+}
+
+/* Cartões de Atalhos Rápidos */
+.card {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }

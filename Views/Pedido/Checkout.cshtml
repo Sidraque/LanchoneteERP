@@ -1,0 +1,18 @@
+﻿@model Pedido
+<br />
+<br />
+<div class="row orderForm">
+
+    <h3 class="text-center">Pedido finalizado com sucesso! Obrigado. <span class="glyphicon glyphicon-ok"></span></h3>
+
+    <form asp-action="Checkout" method="post" class="form-horizontal" role="form">
+
+        <div class="form-group">
+            <div class="btn-group col-md-offset-2 col-md-8">
+                <input class="center-block btn-primary"  type="submit" value="Retornar" />
+                @*<input class="btn btn-default" type="submit" value="Retornar " />*@
+            </div>
+        </div>
+    </form>
+</div>
+

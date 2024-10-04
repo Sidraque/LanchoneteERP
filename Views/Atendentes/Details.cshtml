@@ -1,0 +1,36 @@
+﻿@model LanchoneteCore.Models.Atendente
+
+@{
+    ViewData["Title"] = "Detalhe";
+}
+
+<h2>Detalhes</h2>
+
+<div>
+    <h4>Atendente</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Telefone)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.AtendenteID">Editar</a> |
+    <a asp-action="Index">Retornar à lista</a>
+</div>
