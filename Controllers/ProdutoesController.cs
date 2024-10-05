@@ -44,25 +44,29 @@ namespace LanchoneteCore.Controllers
             return View(produto);
         }
 
+        private void PopulateProdutoStatistics() {
+            ViewBag.TotalProdutos = _context.Produto.Count();
+            ViewBag.TotalDisponiveis = _context.Produto.Count(p => p.Disponibilidade == true);
+            ViewBag.TotalIndisponiveis = _context.Produto.Count(p => p.Disponibilidade == false);
+        }
+
         // GET: Produtoes/Create
-        public IActionResult Create()
-        {
+        public IActionResult Create() {
+            PopulateProdutoStatistics(); // Populando a ViewBag com informações reais
             return View();
         }
 
+
         // POST: Produtoes/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProdutoID,Nome,Disponibilidade,ValorUnitario,ImagemUrl")] Produto produto)
-        {
-            if (ModelState.IsValid)
-            {
+        public async Task<IActionResult> Create([Bind("ProdutoID,Nome,Disponibilidade,ValorUnitario,ImagemUrl")] Produto produto) {
+            if (ModelState.IsValid) {
                 _context.Add(produto);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Create)); // Redirecionar para garantir que as informações da ViewBag sejam atualizadas
             }
+            PopulateProdutoStatistics(); // Populando a ViewBag novamente em caso de erro de validação
             return View(produto);
         }
 

@@ -1,50 +1,132 @@
 ﻿@model LanchoneteCore.Models.Produto
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Adicionar Novo Produto";
+    var totalProdutos = ViewBag.TotalProdutos ?? 0;
+    var totalDisponiveis = ViewBag.TotalDisponiveis ?? 0;
+    var totalIndisponiveis = ViewBag.TotalIndisponiveis ?? 0;
 }
 
-<h2>Adicione um novo produto.</h2>
-
-<h4>Produto</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" class="form-control" />
-                <span asp-validation-for="Nome" class="text-danger"></span>
+<div class="container mt-5 p-5 shadow-lg" style="background-color: #ffffff; border-radius: 20px;">
+    <div class="row">
+        <!-- Coluna de Estatísticas Rápidas -->
+        <div class="col-lg-3 mb-4">
+            <div class="mb-4">
+                <h4 class="text-success text-center font-weight-bold">Estatísticas Rápidas</h4>
             </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="Disponibilidade" /> @Html.DisplayNameFor(model => model.Disponibilidade)
-                    </label>
+            <div class="d-flex flex-column gap-3">
+                <!-- Card: Total de Produtos -->
+                <div class="card shadow-sm rounded" style="border-left: 5px solid #28a745;">
+                    <div class="card-body d-flex justify-content-between align-items-center">
+                        <div class="text-secondary">
+                            <h6 class="font-weight-bold">Total de Produtos</h6>
+                            <p class="mb-0">Quantidade cadastrada no sistema.</p>
+                        </div>
+                        <span class="badge badge-success badge-pill display-4 p-3">@totalProdutos</span>
+                    </div>
+                </div>
+
+                <!-- Card: Produtos Disponíveis -->
+                <div class="card shadow-sm rounded" style="border-left: 5px solid #007bff;">
+                    <div class="card-body d-flex justify-content-between align-items-center">
+                        <div class="text-secondary">
+                            <h6 class="font-weight-bold">Disponíveis</h6>
+                            <p class="mb-0">Prontos para venda no momento.</p>
+                        </div>
+                        <span class="badge badge-primary badge-pill display-4 p-3">@totalDisponiveis</span>
+                    </div>
+                </div>
+
+                <!-- Card: Produtos Indisponíveis -->
+                <div class="card shadow-sm rounded" style="border-left: 5px solid #ffc107;">
+                    <div class="card-body d-flex justify-content-between align-items-center">
+                        <div class="text-secondary">
+                            <h6 class="font-weight-bold">Indisponíveis</h6>
+                            <p class="mb-0">Produtos em falta no estoque.</p>
+                        </div>
+                        <span class="badge badge-warning badge-pill display-4 p-3">@totalIndisponiveis</span>
+                    </div>
                 </div>
             </div>
-            <div class="form-group">
-                <label asp-for="ValorUnitario" class="control-label"></label>
-                <input asp-for="ValorUnitario" class="form-control" />
-                <span asp-validation-for="ValorUnitario" class="text-danger"></span>
+            <a asp-action="Index" class="btn btn-outline-success btn-block shadow-sm rounded-pill text-uppercase font-weight-bold mt-4">
+                <i class="fa fa-arrow-left"></i> Retornar à Lista
+            </a>
+        </div>
+
+        <!-- Coluna do Formulário -->
+        <div class="col-lg-6 mb-4">
+            <form asp-action="Create" class="p-5 shadow-sm rounded" style="background-color: #f9f9f9;">
+                <h3 class="text-center text-dark mb-5">Adicionar Novo Produto</h3>
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-4"></div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="Nome" class="control-label font-weight-bold text-secondary">Nome do Produto</label>
+                    <input asp-for="Nome" class="form-control form-control-lg" placeholder="Ex.: Sanduíche Gourmet" style="border: 1px solid #ced4da; border-radius: 12px; padding: 10px;" />
+                    <span asp-validation-for="Nome" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="ValorUnitario" class="control-label font-weight-bold text-secondary">Valor Unitário (R$)</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white text-dark">R$</span>
+                        </div>
+                        <input asp-for="ValorUnitario" class="form-control form-control-lg" placeholder="Ex.: 19,99" style="border: 1px solid #ced4da; border-radius: 12px; padding: 10px;" />
+                    </div>
+                    <span asp-validation-for="ValorUnitario" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="ImagemUrl" class="control-label font-weight-bold text-secondary">URL da Imagem do Produto</label>
+                    <input asp-for="ImagemUrl" class="form-control form-control-lg" placeholder="https://exemplo.com/imagem.jpg" id="imagemUrlInput" style="border: 1px solid #ced4da; border-radius: 12px; padding: 10px;" />
+                    <span asp-validation-for="ImagemUrl" class="text-danger"></span>
+                </div>
+
+                <div class="form-group form-check mb-5">
+                    <input asp-for="Disponibilidade" class="form-check-input" id="disponibilidadeCheck" />
+                    <label asp-for="Disponibilidade" class="form-check-label font-weight-bold text-secondary ml-2" for="disponibilidadeCheck">Disponível para Venda</label>
+                </div>
+
+                <div class="form-group text-center">
+                    <input type="submit" value="Adicionar Produto" class="btn btn-success btn-lg px-5 shadow-sm rounded-pill text-uppercase font-weight-bold" />
+                </div>
+            </form>
+        </div>
+
+        <!-- Coluna da Pré-Visualização da Imagem -->
+        <div class="col-lg-3 d-flex align-items-center justify-content-center">
+            <div class="text-center p-3 shadow-sm rounded" style="background-color: #ffffff;">
+                <img id="imagemPreview" src="https://icons.veryicon.com/png/o/miscellaneous/general-icon-library/preview-65.png" alt="Imagem do Produto" class="img-fluid shadow" style="max-height: 300px; border-radius: 15px; transition: transform 0.3s;" />
+                <p class="text-muted mt-4">Pré-visualização da imagem do produto</p>
             </div>
-            <div class="form-group">
-                <label asp-for="ImagemUrl" class="control-label"></label>
-                <input asp-for="ImagemUrl" class="form-control" />
-                <span asp-validation-for="ImagemUrl" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Adicionar" class="btn btn-success" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Retornar à lista</a>
-</div>
-
 @section Scripts {
+    <script>
+        // Script para atualizar a pré-visualização da imagem conforme o usuário digita a URL
+        document.getElementById("imagemUrlInput").addEventListener("input", function () {
+            var imageUrl = this.value;
+            var imagePreview = document.getElementById("imagemPreview");
+            if (imageUrl) {
+                imagePreview.src = imageUrl;
+            } else {
+                imagePreview.src = "https://icons.veryicon.com/png/o/miscellaneous/general-icon-library/preview-65.png"; // Placeholder padrão
+            }
+        });
+
+        // Efeito ao passar o mouse sobre a imagem
+        document.getElementById("imagemPreview").addEventListener("mouseover", function () {
+            this.style.transform = "scale(1.05)";
+        });
+        document.getElementById("imagemPreview").addEventListener("mouseout", function () {
+            this.style.transform = "scale(1)";
+        });
+    </script>
+
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+<!-- Incluindo Font Awesome para os ícones -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />

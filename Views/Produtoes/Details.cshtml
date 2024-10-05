@@ -1,42 +1,63 @@
 ﻿@model LanchoneteCore.Models.Produto
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalhes do Produto";
 }
 
-<h2>Detalhes do Produto</h2>
+<div class="container mt-5 p-5 shadow-lg" style="background-color: #ffffff; border-radius: 25px;">
+    <div class="row">
+        <!-- Coluna da Imagem do Produto -->
+        <div class="col-md-5 d-flex align-items-center justify-content-center mb-4">
+            <div class="text-center p-4 shadow-sm rounded" style="background-color: #ffffff;">
+                <img src="@(!string.IsNullOrEmpty(Model.ImagemUrl) ? Model.ImagemUrl : "https://icons.veryicon.com/png/o/miscellaneous/general-icon-library/preview-65.png")" alt="Imagem do Produto" class="img-fluid shadow-sm" style="max-height: 350px; border-radius: 15px;" />
+                <p class="text-muted mt-4">Imagem do Produto</p>
+            </div>
+        </div>
 
-<div>
-    <h4>Produto</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Nome)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Nome)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Disponibilidade)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Disponibilidade)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ValorUnitario)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ValorUnitario)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ImagemUrl)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ImagemUrl)
-        </dd>
-    </dl>
+        <!-- Coluna de Informações do Produto -->
+        <div class="col-md-7">
+            <h2 class="text-success mb-4 text-center">Detalhes do Produto</h2>
+            <div class="card shadow-sm p-4" style="background-color: #ffffff; border-radius: 20px;">
+                <div class="card-body p-4">
+                    <h4 class="card-title text-dark font-weight-bold mb-4">
+                        <i class="text-success mr-2"></i> @Model.Nome
+                    </h4>
+                    <hr />
+                    <dl class="row">
+                        <dt class="col-sm-5 text-secondary pl-3"><i class="fa fa-box-open text-warning"></i> Disponibilidade</dt>
+                        <dd class="col-sm-7 pl-3">
+                            @if (Model.Disponibilidade) {
+                                <span class="badge badge-success py-2 px-3" style="font-size: 1rem;">Disponível</span>
+                            }
+                            else {
+                                <span class="badge badge-danger py-2 px-3" style="font-size: 1rem;">Indisponível</span>
+                            }
+                        </dd>
+
+                        <dt class="col-sm-5 text-secondary pl-3"><i class="fa fa-tag text-primary"></i> Valor Unitário</dt>
+                        <dd class="col-sm-7 text-dark font-weight-bold pl-3">R$ @Model.ValorUnitario.ToString("0.00")</dd>
+
+                        <dt class="col-sm-5 text-secondary pl-3"><i class="fa fa-link text-info"></i> URL da Imagem</dt>
+                        <dd class="col-sm-7 pl-3">
+                            <a href="@Model.ImagemUrl" target="_blank" class="text-info" style="word-wrap: break-word; overflow-wrap: break-word;">
+                                @Model.ImagemUrl
+                            </a>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <a asp-action="Edit" asp-route-id="@Model.ProdutoID" class="btn btn-warning btn-lg shadow-sm rounded-pill text-uppercase font-weight-bold">
+                    <i class="fa fa-edit"></i> Editar Produto
+                </a>
+                <a asp-action="Index" class="btn btn-outline-success btn-lg shadow-sm rounded-pill text-uppercase font-weight-bold ml-3">
+                    <i class="fa fa-arrow-left"></i> Retornar à Lista
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.ProdutoID">Editar</a> |
-    <a asp-action="Index">Retornar à lista</a>
-</div>
+
+<!-- Incluindo Font Awesome para os ícones -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
